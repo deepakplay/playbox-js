@@ -1,6 +1,6 @@
 /*
      Project    : PlayBox  HTML, CSS, Javascript
-     Description: This library helps to displays images and videos by filling the screen, and dimming out the web page
+     Description: This library helps to displays HTML, image slider by filling the screen and dimming out the web page.
      Created by : K. Deepak Kumar
      Contact at : deepakplay14@gmail.com
      Licence    : MIT License
