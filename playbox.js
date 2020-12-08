@@ -230,17 +230,17 @@ const PlayBox = (function(){
     })();
     
     var getElement = function(element){
-        if(!(element instanceof Element)){
+        if(!(element instanceof Element) && !(element instanceof NodeList)){
             return document.querySelector(element);
         }
         return element;
     }
 
     var getElements = function(element){
-        if(!(element instanceof Element)){
-            return document.querySelectorAll(element);
+        if(!(element instanceof Element)  && !(element instanceof NodeList)){
+            return Array.from(document.querySelectorAll(element));
         }
-        return element;
+        return Array.from(element);
     }
 
     var children = function(element){
@@ -309,6 +309,7 @@ const PlayBox = (function(){
     }
 
     var index = function(child){
+        child = getElement(child);
         const element = Array.from(children(child.parentNode));
         return element.indexOf(child);
     }
@@ -402,16 +403,16 @@ const PlayBox = (function(){
         },
         
         // Polyfilled Similar jQuery Functions available to use from PlayBox
-        getElement: getElement,
-        getElements: getElements,
         fadeIn: fadeIn,
         fadeOut: fadeOut,
-        click: click,
+        getElement: getElement,
+        getElements: getElements,
+        children: children,
         append: append,
         prepend: prepend,
         hasClass: hasClass,
-        children: children,
         is: is,
         index: index,
+        click: click,
     }
 })();
