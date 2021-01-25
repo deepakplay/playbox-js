@@ -128,7 +128,10 @@
                     $image.fadeIn(o['slideIn']);
                 });
                 state.set($boxTarget, index);
-                $imgListElement.animate({scrollLeft: $newActive.position().left}, o['slideIn']);
+
+                if ($newActive.position()) {
+                    $imgListElement.animate({scrollLeft: $newActive.position().left}, o['slideIn']);
+                }
             }
 
             setActive(0);
