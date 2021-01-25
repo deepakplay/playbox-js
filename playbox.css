@@ -43,7 +43,7 @@
 
 .playbox .container {
     position: relative;
-    top: 100px;
+    top: 20px;
     width: 95%;
     min-height: 200px;
     background-color: #fff;
@@ -65,7 +65,7 @@
 
 @media (max-width: 700px) {
     .playbox .container {
-        top: 65px;
+        top: 25px;
         width: 92%;
     }
 
