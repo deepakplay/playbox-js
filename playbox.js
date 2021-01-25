@@ -12,7 +12,7 @@
 (function ($) {
     function fadeSlideIn($element, duration=100, callback=function () {})
     {
-        $element.css({'display': 'block', 'opacity': '1', 'animation': 'fadeIn ' + duration + 'ms ease'});
+        $element.css({'display': 'grid', 'opacity': '1', 'animation': 'fadeIn ' + duration + 'ms ease'});
         $element.find('.container').css({'animation': 'slideIn ' + duration + 'ms ease'});
         setTimeout(function () {
             callback();
@@ -21,7 +21,7 @@
 
     function fadeSlideOut($element, duration, callback=function () {})
     {
-        $element.css({'display': 'block', 'opacity': '0', 'animation': 'fadeOut ' + duration + 'ms ease'});
+        $element.css({'display': 'grid', 'opacity': '0', 'animation': 'fadeOut ' + duration + 'ms ease'});
         $element.find('.container').css({'animation': 'slideOut ' + duration + 'ms ease'});
         setTimeout(function () {
             $element.css({'display': 'none'});
@@ -32,6 +32,7 @@
     $.fn.playbox = function ($boxTarget, options) {
         // State Management through HashMap
         const state = new Map();
+        // Options
         const o = $.extend({
             'enter': 300,
             'exit': 300,
@@ -39,7 +40,22 @@
             'slideOut': 100,
             'imageList': []
         }, options);
-
+        // Keyboard navigation
+        const keyboardHandler = function (e) {
+            switch (e.keyCode) {
+                case 27:    // Escape
+                    $boxTarget.find('.exit').click();
+                    break;
+                case 37:    // Left
+                    $boxTarget.find('.leftarrow').click();
+                    break;
+                case 39:    // Right
+                    $boxTarget.find('.rightarrow').click();
+                    break;
+                default:
+                    break;
+            }
+        };
         let setActive = function (index) {};
 
         function loadBox($boxButton, $boxTarget, enter, exit)
@@ -53,6 +69,8 @@
                     setActive(imageId);
                 }
 
+                $boxTarget.closest('body').on('keydown', keyboardHandler);
+
                 return false;
             });
 
@@ -60,6 +78,7 @@
             $boxTarget.click(function (e) {
                 if ($(e.target).hasClass('exit')) {
                     fadeSlideOut($boxTarget, exit);
+                    $boxTarget.closest('body').off('keydown', keyboardHandler);
                 }
             });
         }
@@ -99,15 +118,17 @@
             // Active Image
             setActive = function (index) {
                 $imgList.eq(state.get($boxTarget)).removeClass('active');
-                $imgList.eq(index).addClass('active');
 
+                const $newActive = $imgList.eq(index)
                 const $image = $boxTarget.find('.bg-image');
 
+                $newActive.addClass('active');
                 $image.fadeOut(o['slideOut'], function () {
                     $image.attr('src', o['imageList'][index]);
                     $image.fadeIn(o['slideIn']);
                 });
                 state.set($boxTarget, index);
+                $imgListElement.animate({scrollLeft: $newActive.position().left}, o['slideIn']);
             }
 
             setActive(0);
@@ -129,7 +150,7 @@
                     }
                 }
             });
-            //Item List Click Handler
+            // Item List Click Handler
             $imgListElement.click(function (e) {
                 const $target = $(e.target);
 
