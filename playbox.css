@@ -16,6 +16,21 @@
     background-color: rgba(0, 0, 0, .6);
     display: none;
     grid-template-rows: auto max-content;
+    -ms-grid-rows: 1fr max-content;
+}
+
+.playbox.playbox-fade-in,
+.playboximage.playbox-fade-in {
+    display: grid;
+    display: -ms-grid;
+    opacity: 1;
+}
+
+.playbox.playbox-fade-out,
+.playboximage.playbox-fade-out {
+    display: grid;
+    display: -ms-grid;
+    opacity: 0;
 }
 
 .playbox .exit, .playboximage .exit {
@@ -52,6 +67,7 @@
     max-width: 800px;
     padding: 30px 20px;
     border-radius: 4px;
+    -ms-grid-row: 1;
 }
 
 .playboximage .container {
@@ -61,6 +77,7 @@
     box-shadow: none;
     justify-content: center;
     align-items: center;
+    -ms-grid-row: 1;
 }
 
 @media (max-width: 700px) {
@@ -123,6 +140,7 @@
 .playboximage .bg-image {
     max-width: calc(100% - 120px);
     max-height: 100%;
+    flex-shrink: 0;
 }
 
 .playboximage .arrow {
@@ -149,6 +167,7 @@
     justify-content: left;
     align-items: center;
     padding: 20px 50px;
+    -ms-grid-row: 2;
 }
 
 .playboximage .image-list img {

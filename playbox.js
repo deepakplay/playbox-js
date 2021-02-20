@@ -12,7 +12,9 @@
 (function ($) {
     function fadeSlideIn($element, duration=100, callback=function () {})
     {
-        $element.css({'display': 'grid', 'opacity': '1', 'animation': 'fadeIn ' + duration + 'ms ease'});
+        $element.removeClass('playbox-fade-out');
+        $element.css({'display': '', 'animation': 'fadeIn ' + duration + 'ms ease'});
+        $element.addClass('playbox-fade-in');
         $element.find('.container').css({'animation': 'slideIn ' + duration + 'ms ease'});
         setTimeout(function () {
             callback();
@@ -21,7 +23,9 @@
 
     function fadeSlideOut($element, duration, callback=function () {})
     {
-        $element.css({'display': 'grid', 'opacity': '0', 'animation': 'fadeOut ' + duration + 'ms ease'});
+        $element.removeClass('playbox-fade-in');
+        $element.css({'display': '', 'animation': 'fadeOut ' + duration + 'ms ease'});
+        $element.addClass('playbox-fade-out');
         $element.find('.container').css({'animation': 'slideOut ' + duration + 'ms ease'});
         setTimeout(function () {
             $element.css({'display': 'none'});
@@ -105,8 +109,7 @@
             });
 
             state.set($boxTarget, 0);
-
-            // Active Image
+            // Image list container
             const $imgListElement = $boxTarget.find('.image-list');
 
             // Adding Image to the list
