@@ -17,6 +17,7 @@
     display: none;
     grid-template-rows: auto max-content;
     -ms-grid-rows: 1fr max-content;
+    -ms-grid-columns: 1fr;
 }
 
 .playbox.playbox-fade-in,
