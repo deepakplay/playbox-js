@@ -116,25 +116,24 @@
             o['imageList'].forEach(function (item) {
                 $imgListElement.append($('<img>', {'src': item}));
             });
-
-            const $imgList = $imgListElement.children();
+            $imgListElement.owlCarousel({
+                center: true,
+                autoWidth: true,
+                loop: true,
+                rewind: false,
+                margin: 10,
+                dots: false
+            });
             // Active Image
             setActive = function (index) {
-                $imgList.eq(state.get($boxTarget)).removeClass('active');
-
-                const $newActive = $imgList.eq(index)
                 const $image = $boxTarget.find('.bg-image');
 
-                $newActive.addClass('active');
                 $image.fadeOut(o['slideOut'], function () {
                     $image.attr('src', o['imageList'][index]);
                     $image.fadeIn(o['slideIn']);
                 });
                 state.set($boxTarget, index);
-
-                if ($newActive.position()) {
-                    $imgListElement.animate({scrollLeft: $newActive.position().left}, o['slideIn']);
-                }
+                $imgListElement.trigger('to.owl.carousel', [index]);
             }
 
             setActive(0);
@@ -159,9 +158,10 @@
             // Item List Click Handler
             $imgListElement.click(function (e) {
                 const $target = $(e.target);
+                const carousel = $imgListElement.data('owl.carousel');
 
                 if ($target.is('img')) {
-                    setActive($target.index());
+                    setActive(carousel.relative($target.parent().index()));
                 }
             });
 

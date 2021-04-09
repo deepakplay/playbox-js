@@ -16,6 +16,7 @@
     background-color: rgba(0, 0, 0, .6);
     display: none;
     grid-template-rows: auto max-content;
+    grid-template-columns: 100%;
     -ms-grid-rows: 1fr max-content;
     -ms-grid-columns: 1fr;
 }
@@ -161,30 +162,33 @@
 
 .playboximage .image-list {
     position: relative;
-    overflow-x: auto;
+    overflow-x: hidden;
     box-shadow: 0 0 6px rgba(0, 0, 0, .6);
     background-color: rgba(0, 0, 0, .4);
-    display: flex;
-    justify-content: left;
-    align-items: center;
     padding: 20px 50px;
     -ms-grid-row: 2;
 }
-
+.playboximage .image-list .owl-stage {
+    min-width: 100%;
+}
+.playboximage .image-list .owl-item {
+    display: inline-block;
+}
 .playboximage .image-list img {
     width: auto;
     max-height: 140px;
-    margin-right: 10px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 10px rgba(0, 0, 0, .5);
     border-radius: 8px;
     cursor: pointer;
 }
-
-.playboximage .image-list .active {
+.playboximage .image-list .center > img {
     transition: all .2s ease;
     border: none;
     box-shadow: 0 0 7px rgba(255, 255, 255, .7);
+}
+.playboximage .image-list .owl-nav, .playboximage .image-list .owl-dots {
+    display: none;
 }
 
 @media (max-width: 800px) {
