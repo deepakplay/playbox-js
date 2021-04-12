@@ -162,7 +162,8 @@
 
 .playboximage .image-list {
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
+    max-height: 180px;
     box-shadow: 0 0 6px rgba(0, 0, 0, .6);
     background-color: rgba(0, 0, 0, .4);
     padding: 20px 50px;

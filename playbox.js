@@ -116,14 +116,6 @@
             o['imageList'].forEach(function (item) {
                 $imgListElement.append($('<img>', {'src': item}));
             });
-            $imgListElement.owlCarousel({
-                center: true,
-                autoWidth: true,
-                loop: true,
-                rewind: false,
-                margin: 10,
-                dots: false
-            });
             // Active Image
             setActive = function (index) {
                 const $image = $boxTarget.find('.bg-image');
@@ -135,6 +127,19 @@
                 state.set($boxTarget, index);
                 $imgListElement.trigger('to.owl.carousel', [index]);
             }
+            $imgListElement.owlCarousel({
+                center: true,
+                autoWidth: true,
+                loop: true,
+                rewind: false,
+                margin: 10,
+                dots: false,
+                onDragged: function (e) {
+                    const carousel = $imgListElement.data('owl.carousel');
+
+                    setActive(carousel.relative(e.item.index));
+                }
+            });
 
             setActive(0);
             // Item List Arrow Click Handler function
