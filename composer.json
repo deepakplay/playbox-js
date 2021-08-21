@@ -1,0 +1,20 @@
+{
+  "name": "chejam/playbox-js",
+  "description": "This library helps to displays HTML, image slider by filling the screen and dimming out the web page.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "K. Deepak Kumar",
+      "email": "deepakplay14@gmail.com"
+    },
+    {
+      "name": "Sergey Shugaev",
+      "email": "sergey.shugaev@click2mice.com"
+    }
+  ],
+  "require": {
+    "bower-asset/jquery": "^3.2@stable",
+    "bower-asset/owl.carousel": "^2.3.4"
+  }
+}
